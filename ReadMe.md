@@ -151,8 +151,8 @@
     对于 label 描述表单控件,例如日期，提供具体的格式，方便用户输入，例子如下：
 
     ```html
-        <label for="date">日期（日-月-年）</label>
-        <input type="text" name="date" id="date" />
+    <label for="date">日期（日-月-年）</label>
+    <input type="text" name="date" id="date" />
     ```
 
 ### 2.2.5 颜色和对比度
