@@ -13,7 +13,7 @@
 -   [参考文献](#参考文献)
 
 
-在开发完成以后，我们需要对项目进行整体的无障碍测试，通过工具和人工检测，找到其中的缺陷，进行修复，按照测试的准确程度层层递进，可分为以下三个层次，业务可根据实际场景进行选择：
+在开发完成以后，我们需要对项目进行整体的无障碍测试，通过工具和人工检测，找到其中的缺陷，进行修复，按照测试的准确程度层层递进，可分为以下三个层次，业务可根据实际场景进行选择：
 
 * 自动化检查
 * 借助辅助技术进行自测
@@ -22,14 +22,14 @@
 ### 自动化检查
 
 
-自动化检查可以检查出一些可访问性遵从性问题，如标题的结构和顺序、alt文本是否存在、页面标题和语言设置是否存在、颜色对比度是否合理、一定程度上的HTML结构是否语义化等。由于开发阶段和自动化检测工具的相同性，这里推荐按照工具的以下使用顺序进行自动化检查，先对代码进行静态检测，然后通过浏览器工具测试：
+自动化检查可以检查出一些可访问性遵从性问题，如标题的结构和顺序、alt文本是否存在、页面标题和语言设置是否存在、颜色对比度是否合理、一定程度上的HTML结构是否语义化等。由于开发阶段和自动化检测工具的相同性，这里推荐按照工具的以下使用顺序进行自动化检查，先对代码进行静态检测，然后通过浏览器工具测试：
 * [eslint-plugin-jsx-a11y](./develop.md)
 * [Axe Chrome Plugin](./develop.md)
 * [I want to see like the colour blind](./develop.md)
  
 #### Benchmark
 
-在我们通过工具和人工测试后，怎么衡量我们测试是否达到一定的要求，这个时候我们需要寻找一些工具对我们的测试进行评估或生成生产测试报告，来对我们的测试给出有效的评估。Lighthouse lighthouse 是Google开发的网站性能评测工具，主要用于改进网络应用的质量，已开源。内置在Chrome Dev Tools 中，也有插件版本。
+在我们通过工具和人工测试后，怎么衡量我们测试是否达到一定的要求，这个时候我们需要寻找一些工具对我们的测试进行评估或生成生产测试报告，来对我们的测试给出有效的评估。Lighthouse lighthouse 是Google开发的网站性能评测工具，主要用于改进网络应用的质量，已开源。内置在Chrome Dev Tools 中，也有插件版本。
  
 无障碍的检测是该工具评测的一个子项，可以借助这个插件生成站点的无障碍评分报告。
 
@@ -58,16 +58,16 @@
 
         Chrome插件: [ChromeVox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn) 仅与浏览器相关
 
-* 人群类型
+* 人群类型
     * 对于失明用户，我们在测试过程中需要开启屏幕阅读器和通过键盘去测试，对于视力障碍，我们推荐使用[I want to see like the colour blind](./develop.md)测试。
 
-* 浏览器
+* 浏览器
     * 在火狐和Chrome中我们使用[axe](./develop.md)插件进行测试(推荐)，在IE中使用[Web Accessibility Toolbar](https://developer.paciellogroup.com/resources/wat/)测试，Safari使用[Web Development Tools](https://developer.apple.com/safari/tools/)测试
 
 * 操作系统
     * 推荐在widnow系统中我们可以在火狐或Chrome中使用[axe](./develop.md)插件进行测试,Apple系统下使用VoiceOver + Chrome中[axe](./develop.md)插件测试
  
-* 对可访问性的影响
+* 对可访问性的影响
     * 对于网站的可访问性，可以参考下文的[checklist](#测试checklist)，若checklist中都符合要求，基本支持网站的可访问性
 
 
@@ -99,7 +99,7 @@
 
 ### 参考文献
 
-* [WebAIM](https://webaim.org/projects/screenreadersurvey7/)
+* [WebAIM](https://webaim.org/projects/screenreadersurvey7/)
 * [a11y tools](https://www.digitala11y.com/accessibility-plug-ins-ie-chrome-firefox-browsers/)
 * [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y)
 * [I want to see like the colour blind](https://websitecreationworkshop.com/blog/design-tips/see-like-color-blind/)
