@@ -59,7 +59,7 @@
         Chrome插件: [ChromeVox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn) 仅与浏览器相关
 
 * 人群类型
-    * 对于失明用户，我们在测试过程中需要开启屏幕阅读器和通过键盘去测试，对于视力障碍，我们推荐使用[I want to see like the colour blind](./develop.md)测试。
+    * 对于失明用户，我们在测试过程中需要开启屏幕阅读器和通过键盘去测试，对于视力障碍，我们推荐使用[I want to see like the colour blind](./develop.md)测试。
 
 * 浏览器
     * 在火狐和Chrome中我们使用[axe](./develop.md)插件进行测试(推荐)，在IE中使用[Web Accessibility Toolbar](https://developer.paciellogroup.com/resources/wat/)测试，Safari使用[Web Development Tools](https://developer.apple.com/safari/tools/)测试
