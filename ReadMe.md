@@ -1,144 +1,168 @@
 <button>[回到首页](../index.md)</button>
 
--   [2.1.1 组件的分类](#211-组件的分类)
-    -   [2.1.1.1 数据展示类](#2111-数据展示类)
-    -   [2.1.1.2 即时反馈类](#2112-即时反馈类)
-    -   [2.1.1.3 菜单与导航类](#2113-菜单与导航类)
-    -   [2.1.1.4 表单类](#2114-表单类)
--   [2.2 参考文献](#22-参考文献)
+<!-- TOC -->
 
-# 2.1 Funion 组件使用
+-   [2.2 开发 Checklist](#2.2-开发-Checklist)
 
-Fusion 是一种旨在提升设计与开发之间 UI 构建效率的工作方式。我们致力于对无障碍的支持，其中 Fusion 基础组件已提供无障碍支持，开发者可以进行测试和使用，并提供[Fusion](https://fusion.design/component)无障碍说明文档和使用。所有非组件 API 属性都可以透传至 DOM 元素(我们可以传递参数，改变 aria 和 role 属性)。
+    -   [2.2.1 常规](#2.2.1-常规)
+    -   [2.2.2 语义化标签](#2.2.2-语义化标签)
+    -   [2.2.3 图片](#2.2.3-图片)
+    -   [2.2.4 表单](#2.2.4-表单)
+    -   [2.2.5 颜色和对比度](#2.2.5-颜色和对比度)
 
-经过上一章节的学习，对无障碍有初步的认识，如何进行改造呢，下面我们给我一些指引：
+-   [2.3 参考文献](#2.3-参考文献)
 
--   对于组件，我们为开发者内置 role 和一些 aria-*属性，开发者也可以对非组件 API 属性都可以透传至 DOM 元素，进行修改 role 和 aria-*参数，但是要注意对应关系，请[参考](../part1/WAI-ARIA.md)
--   对一些特殊的组件传递参数才能支持无障碍，设置`id`,`autoFocus`和传参数，如下：
-    -   id - `Balloon`,`Rating`
-    -   autoFocus - 弹层自动聚焦，例如`Dialog`,`Overlay`,`Dropdown`
-    -   传参数 - 有些组件需要根据具体的业务，实现不同的可访问性，这里为开发者内置一些参数，想使用无障碍的时候，用户只需要根据现有的需求，选择对应的内置参数，例如设置 aria-label,以下组件需要用户传参数才支持无障碍组件如下：`NumberPicker`、`Transfer`
--   我们为开发者提供无障碍的使用文档，请[参考](https://fusion.design/component)组件 API 中`ARIA and KeyBoard`
+## 2.2 开发 Checklist
 
-## 2.1.1 组件的分类
+对上节的知识了解后，我们为开发者提供一个改造的清单，我们所罗列的都是无障碍不可避免的问题，按照清单修改，页面基本支持无障碍，请开发者对如下规则进行阅读：
 
-本部分我们会为开发者介绍具体如何对组件改造，使开发者更好的使用组件,分如下四类：
+### 2.2.1 常规
 
-### 2.1.1.1 数据展示类
-         
--   `Icon`
-    -   图标类元素
-    -   若为装饰性 icon，请设置`<Icon aria-hidden>` 或 `<Icon role="presentation">`
-    -   若有真实语义，请设置`aria-label`以描述 icon 行为`<Icon aria-label="xxx">`
--   `Badge`
-    -   如需朗读含义，可通过 css 设置仅读屏软件可读的内容 [参考文档](https://fusion.design/component/slider)
--   `Slider`
-    -   内容如需朗读，请自定义 alt 属性（若为 img）或 aria-label 属性 [参考文档](https://fusion.design/component/slider)
--   `Table`
-    -   默认为纯数据展示的表格 - 若作为布局使用复杂功能，需自定义 role 等属性，[参考文档](https://fusion.design/component/table)
--   `Tag`
-    -   删除类标签，删除按钮默认朗读为“删除”，可自定义文案，自定义方式参考[国际化语言包的设置](https://fusion.design/component/config-provider)
--   `Paragraph`, `Progress`, `Timeline`, `Collapse`
+-   [ ] 设置 lang 让屏幕阅读器选择语言去读取，lang 参数值遵循[ISO_639-1 规则](https://zh.wikipedia.org/wiki/ISO_639-1)，
 
-### 2.1.1.2 即时反馈类
+    ```html
+    <html lang="en">
+        或
+        <html xml:lang="en"></html>
+    </html>
+    ```
 
--   `Message`
-    -   默认 role="alert"，当出现在 document 中时，屏幕阅读器会优先朗读它的内容。 
-    - 若为非典型使用，例如一直展示在页面上，请根据实际需求覆盖默认 role，`<Message role="" />`
--   `Balloon`
-    -   传入 id 以支持无障碍（为支持 SSR，所以不默认生成 id） 
-    - 默认 role="tooltip"，若有高优先级，请根据实际需求覆盖默认 role 
-    - 简单文案描述推荐使用 Balloon.Tooltip，focus 后会自动展开 
-    - 请务必设置可聚焦的 trigger 元素
--   `Dialog`
-    -   默认 role="dialog"，若有高优先级，请根据实际需求覆盖默认 role 
-    - 可通过`autoFocus`开启默认聚焦，焦点为弹层内容上第一个可聚焦元素 `<Dialog autoFocus />` 
-    - 请务必设置可聚焦的 trigger 元素
--   `Overlay`
-    -   可通过`autoFocus`开启默认聚焦，焦点为弹层内容上第一个可聚焦元素 `<Overlay autoFocus />` 
-    - 请务必设置可聚焦的 trigger 元素
+-   [ ] 所有标签属性要设置唯一 ID
 
-### 2.1.1.3 菜单与导航类
+-   [ ] 页面上的文本，要按照书写习惯添加标点符号。屏幕阅读器在读取文本标点符号适时出现停顿
 
--   菜单
+-   [ ] 当组件或元素聚焦时，要出现有聚焦的边框标志(比如按钮聚焦时，有蓝色边框)，使得与不聚焦状态做区别
 
-    -   `Menu`
-        -   支持键盘导航
-        -   默认 role="menu"，子元素为"menuitem"，菜单自定义单选子元素为"menuitemradio"，菜单自定义多选子元素为"menuitemcheckbox"
-        -   使用`selectMode`API 改变组件可选状态后，默认 role="listbox"，跟是否多选改变`aria-multiselectable`的值，子元素为“listitem”
-        -   请根据实际需求覆盖默认 role `<Menu role="listbox" />` `<Menu.Item role="listitem" />`
-    -   `Nav`
-        -   默认 role="listbox"，子元素为"listitem"
-        -   请根据实际需求覆盖默认 role `<Nav role="menu" />` `<Nav.Item role="menuitem" />`
-    -   `Dropdown`
-        -   请务必设置可聚焦的 trigger 元素
-        -   弹层展开后会自动聚焦，可通过设置 autoFocus={false}禁用
+-   [ ] 所有按钮文本描述都是可读取的，icon 类按钮要有`aria-label`或`aria-labelledby`来辅助描述
 
--   导航
-    -   `Tab`
-        -   默认 role="tablist"，子元素为"tab"
-        -   支持键盘导航
-    -   `Pagination`
-        -   朗读格式默认为“上一页，当前\${i}页”，可自定义文案，自定义方式参考[国际化语言包的设置](https://fusion.design/component/config-provider)
-    -   `Step`、`Breadcrumb`
-        -   默认`aria-current`标记当前步骤
-    -
+-   [ ] 视频要添加字幕，通过引入文件，如下：
 
-### 2.1.1.4 表单类
+```html
+<video controls>
+    <source src="movie.mp4" type="video/mp4" />
+    <track
+        label="English Captions"
+        kind="captions"
+        srclang="eN"
+        src="captions.vtt"
+        default
+    />
+    <track
+        label="Subtitulos en español"
+        kind="captions"
+        srclang="es"
+        src="subs.vtt"
+    />
+</video>
+```
 
--   推荐： Form Field Input CheckBox Radio Switch Select NumberPicker Button Range Rating DatePicker TimePicker Upload
--   不推荐：TreeSelect CascaderSelect Transfer
+-   [ ] 对于一些文本属性，屏幕阅读器读取属性优先级如下(只读取优先级最高的)：aria-labelledby，aria-label，alt，title
 
-    -   `Input`
-        -   自动根据禁用状态设置`aria-disabled`
-        -   请使用者根据具体场景，设置`aria-live`、`aria-label` [参考文档](https://fusion.design/component/input)
-    -   `CheckBox` 基本无需使用者改动
-        -   支持键盘导航
-        -   根据选中状态更新`aria-checked`
-    -   `Radio` 基本无需使用者改动
-        -   支持键盘导航
-        -   根据选中状态更新`aria-checked`
-    -   `Switch`
-        -   默认 role="switch"
-        -   根据选中状态更新`aria-checked`
-    -   `Button` `SplitButton` `MenuButton`
+    对于同一个元素 aria-labelledby，aria-label 只能使用一个(在同时使用时，用户代理在生成可访问的名称属性时将为 aria-labelledby 分配更高的优先级)。
 
-        -   默认使用`<button>`标签来渲染，可自定义标签类型`<Button component="a">`
-        -   可通过配置设置自动聚焦，<MenuButton menuProps={{autoFocus: true}} /> <SplitButton menuProps={{autoFocus: true}} />
+-   [ ] 非语义标签的键盘事件捕获，要使用 onkeydown ，IE 浏览器不会为非字母数字键触发按键事件
 
-    -   `NumberPicker`
-        -   支持键盘上下按键，增加、减少数字。
-        -   开发者可通过传递`upBtnProps` `downBtnProps`参数，自定义增加减少按钮的`aria-label`文案，[参考文档](https://fusion.design/component/number-picker)。
+-   [ ] 代码的逻辑顺序与显示的顺序要保持一致
 
-    -   `Range` 
-        - 使用左右方向键去改变数值。
-        -   默认 role=“slider”，滑动更新以下值`aira-valuenow`(定义当前值),`aria-valuetext`(可读的替代文本),`aria-valuemax`(最大值),`aria-valuemin`(最小值)
-    -   `Rating`
-        -   传入 id 支持无障碍。
-        -   支持键盘操作
-        -   通过 readAs 函数自定义展示/朗读的文案。
-    -   `DatePicker`
-        -   使用 role 为 grid,rowgroup,row 和 cell,并设置`aria-disabled`(是否为禁选择状态)与`aria-selected`(是否被选择)。
-        -   建议给予充分的`aria-label`提示，鼓励用户按照指定格式手动输入日期
-    -   `TimePicker` 
-        - 建议给予充分的`aria-label`提示，鼓励用户按照指定格式手动输入日期
-        -   使用 role 为 listbox 和 option,设置 aria-selected,tabIndex。
-    -   `Upload`
-        -   设置 role 为 upload 和在 input 中设置 aria-hidden，不让屏幕阅读器读取。
-        -   建议至少保留一种点击上传的途径
-    -   `Transfer`
-        -   使用 role 为 menu，menuitemcheckbox 和 aria-checked，tabIndex 属性。
-        -   可自定义文案，自定义方式参考[国际化语言包的设置](https://fusion.design/component/config-provider)
-        -   无障碍设计中，请尽可能地避免这一组件的使用
-    
-    
-    *   `TreeSelect` `CascaderSelect` `Cascader` 
-        -   均支持方向键操作，上下按键为同级内容切换，左右按键为父子级切换.
-        -   无障碍设计中，请尽可能地避免这些组件的使用
+-   [ ] 对于重复菜单的跳过，请[参考](../content-creation-link/page1.md)
 
-## 2.2 参考文献
+-   [ ] 关于元素的隐藏，请[参考](../content-creation-link/page2.md)
 
--   [WAI-ARIA 1.1](https://www.w3.org/TR/wai-aria-1.1/#region)
--   [WCAG 2.0](https://www.w3.org/TR/WCAG20/)
--   [WCAG 2.0 中文版](https://www.w3.org/Translations/WCAG20-zh/)
--   [WCAG 2.1](https://www.w3.org/TR/WCAG21/)
+### 2.2.2 语义化标签
+
+-   [ ] 务必使用语义化标签,并且 body 的直接子元素必须是以下几类标签。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+
+    ```html
+    <header>
+        or role="banner"
+        <header>
+            `与`role="banner"`等价
+            <nav>
+                or role="navigation"
+                <main>
+                    or role="main"
+                    <article>
+                        or role="article"
+                        <aside>
+                            or role="complementary"
+                            <footer>or role="contentinfo"</footer>
+                        </aside>
+                    </article>
+                </main>
+            </nav>
+        </header>
+    </header>
+    ```
+
+-   [ ] 每个页面，有且仅有一个`<main>`标签或 role="main"的元素，并且为页面的主题内容
+
+-   [ ] 列表结构尽量使用 ul、ol、dl 结构组织内容
+
+-   [ ] 不使用语义化标签时，合理使用了`aria-*`与`role`来描述元素，请[参考](../part1/WAI-ARIA.md)
+
+-   [ ] 列表结构尽量使用 ul、ol、dl 结构组织内容
+
+-   [ ] 不使用语义化标签时，合理使用了`aria-*`与`role`来描述元素，请[参考](../part1/WAI-ARIA.md)
+
+-   [ ] 要正确使用如下标签：
+
+```
+    b	粗体文本
+    em	着重文本
+    i	斜体字
+    strong 加重语气
+    ins	删除文本
+    del	下划线文本
+```
+
+-   [ ] 标题要使用 h1~h5，不能出现 h 标签跳跃，遵循从 h1 到 h5 顺序
+
+### 2.2.3 图片
+
+-   [ ] 图片要设置 alt 属性或者 longdes 属性
+
+    -   对于有意义的图片，要设置 alt 并且描述文字简洁，不冗余，例如 logo：
+
+    ```html
+    <img src="logo.jpg" alt="this is logo" />
+    ```
+
+    -   对于无意义的图片，要设置 alt 为空，例如一些图标，装饰图片：
+
+    ```html
+    <img src="icon.jpg" alt="" />
+    ```
+
+-   [ ] 不要使用图片标题，使用文本标题
+
+### 2.2.4 表单
+
+-   [ ] 表单元素的 label 要遵循约定关系[WCAG 用户输入目的的列表](https://w3c.github.io/WCAG21-zh/index.html#input-purposes)
+        遵循这些规范有助于浏览器自动回填数据、屏幕阅读器更好地传达信息
+
+-   [ ] 表单元素要遵循如下规则：
+
+    使用 Tab 键可以顺序的切换表单元素
+
+    对于 label 描述表单控件,例如日期，提供具体的格式，方便用户输入，例子如下：
+
+    ```html
+
+    使用 Tab 键可以顺序的切换表单元素
+
+    对于 label 描述表单控件,例如日期，提供具体的格式，方便用户输入，例子如下：
+
+    ```html
+        <label for="date">日期（日-月-年）</label>
+        <input type="text" name="date" id="date" />
+    ```
+
+### 2.2.5 颜色和对比度
+
+-   [ ] 不要依赖单一元素。例如：在展示图片、表格时，用户要加入纹理或图案。保证色盲用户能辨别，不用担心颜色会影响他对数据的理解。
+
+## 2.3 参考文献
+
+-   [Princeton Content Creator Checklist](https://ux.princeton.edu/accessibility/accessibility-checklist)
+-   [MSU A11y Checklist](https://webaccess.msu.edu/Help_and_Resources/checklist.html)
+-   [a11yproject Checklist](https://a11yproject.com/)
