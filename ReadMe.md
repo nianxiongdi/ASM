@@ -21,7 +21,7 @@
 
 ### 浏览器检测工具
 
-开发者在开发的过程中，可以通过浏览器插件对已经编写的代码进行测试，是否符合无障碍标准，这里为开发者提供[Axe Chrome Plugin](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd),介绍如下：
+开发者在开发的过程中，可以通过浏览器插件对已经编写的代码进行测试，是否符合无障碍标准，这里为开发者提供[Axe Chrome Plugin](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd),介绍如下：
 
 * 在浏览器中测试代码是否符合无障碍标准。
 * Axe可访问性检查器是一个快速、轻量级的可访问性测试工具，它基于业内最流行的开源无障碍测试库axe-core，安装成功后可在Chrome Dev Tools面板找到。可以静态分析当前已存在于document中的内容。
