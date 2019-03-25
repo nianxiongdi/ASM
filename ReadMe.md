@@ -2,21 +2,21 @@
 
 <!-- TOC -->
 
--   [2.2 开发 Checklist](#22-开发-Checklist)
+-   [1. 开发 Checklist](#1-开发-Checklist)
 
-    -   [2.2.1 常规](#221-常规)
-    -   [2.2.2 语义化标签](#222-语义化标签)
-    -   [2.2.3 图片](#223-图片)
-    -   [2.2.4 表单](#224-表单)
-    -   [2.2.5 颜色和对比度](#225-颜色和对比度)
+    -   [1.1 常规](#11-常规)
+    -   [1.2 语义化标签](#12-语义化标签)
+    -   [1.3 图片](#13-图片)
+    -   [1.4 表单](#14-表单)
+    -   [1.5 颜色和对比度](#15-颜色和对比度)
 
--   [2.3 参考文献](#7)
-<a id="1"></a>
-## 2.2 开发 Checklist 
+-   [2. 参考文献](#2-参考文献)
+
+## 1. 开发 Checklist 
 
 对上节的知识了解后，我们为开发者提供一个改造的清单，我们所罗列的都是无障碍不可避免的问题，按照清单修改，页面基本支持无障碍，请开发者对如下规则进行阅读：
 
-### 2.2.1 常规
+### 1.1 常规
 
 -   [ ] 设置 lang 让屏幕阅读器选择语言去读取，lang 参数值遵循[ISO_639-1 规则](https://zh.wikipedia.org/wiki/ISO_639-1)，
 
@@ -68,37 +68,21 @@
 
 -   [ ] 关于元素的隐藏，请[参考](../content-creation-link/page2.md)
 
-### 2.2.2 语义化标签
+### 1.2 语义化标签
 
--   [ ] 务必使用语义化标签,并且 body 的直接子元素必须是以下几类标签。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+-   [ ] 务必使用语义化标签,并且body的直接子元素必须是以下几类标签，并且以下语义化标签与role为等价关系。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
-    ```html
-    <header>
-        or role="banner"
-        <header>
-            `与`role="banner"`等价
-            <nav>
-                or role="navigation"
-                <main>
-                    or role="main"
-                    <article>
-                        or role="article"
-                        <aside>
-                            or role="complementary"
-                            <footer>or role="contentinfo"</footer>
-                        </aside>
-                    </article>
-                </main>
-            </nav>
-        </header>
-    </header>
-    ```
+
+    | 语义化标签 | role | 
+    | :------| ------: | 
+    | header | banner | 
+    | nav | navigation |
+    | main | main |
+    | article | article |
+    | aside | complementary |
+    | footer | contentinfo |
 
 -   [ ] 每个页面，有且仅有一个`<main>`标签或 role="main"的元素，并且为页面的主题内容
-
--   [ ] 列表结构尽量使用 ul、ol、dl 结构组织内容
-
--   [ ] 不使用语义化标签时，合理使用了`aria-*`与`role`来描述元素，请[参考](../part1/WAI-ARIA.md)
 
 -   [ ] 列表结构尽量使用 ul、ol、dl 结构组织内容
 
@@ -117,7 +101,7 @@
 
 -   [ ] 标题要使用 h1~h5，不能出现 h 标签跳跃，遵循从 h1 到 h5 顺序
 
-### 2.2.3 图片
+### 1.3 图片
 
 -   [ ] 图片要设置 alt 属性或者 longdes 属性
 
@@ -135,7 +119,7 @@
 
 -   [ ] 不要使用图片标题，使用文本标题
 
-### 2.2.4 表单
+### 1.4 表单
 
 -   [ ] 表单元素的 label 要遵循约定关系[WCAG 用户输入目的的列表](https://w3c.github.io/WCAG21-zh/index.html#input-purposes)
         遵循这些规范有助于浏览器自动回填数据、屏幕阅读器更好地传达信息
@@ -145,21 +129,16 @@
     使用 Tab 键可以顺序的切换表单元素
 
     对于 label 描述表单控件,例如日期，提供具体的格式，方便用户输入，例子如下：
-
-    使用 Tab 键可以顺序的切换表单元素
-
-    对于 label 描述表单控件,例如日期，提供具体的格式，方便用户输入，例子如下：
-
     ```html
     <label for="date">日期（日-月-年）</label>
     <input type="text" name="date" id="date" />
     ```
 
-### 2.2.5 颜色和对比度
+### 1.5 颜色和对比度
 
 -   [ ] 不要依赖单一元素。例如：在展示图片、表格时，用户要加入纹理或图案。保证色盲用户能辨别，不用担心颜色会影响他对数据的理解。
 
-## 2.3 参考文献
+## 2. 参考文献
 
 -   [Princeton Content Creator Checklist](https://ux.princeton.edu/accessibility/accessibility-checklist)
 -   [MSU A11y Checklist](https://webaccess.msu.edu/Help_and_Resources/checklist.html)
