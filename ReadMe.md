@@ -70,7 +70,7 @@
 
 ### 1.2 语义化标签
 
--   [ ] 务必使用语义化标签,并且body的直接子元素必须是以下几类标签，并且以下语义化标签与role为等价关系。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+-   [ ] 务必使用语义化标签,并且body的直接子元素必须是以下几类标签，并且以下语义化标签与role为等价关系。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
 
     | 语义化标签 | role | 
