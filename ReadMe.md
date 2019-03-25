@@ -142,4 +142,4 @@
 
 -   [Princeton Content Creator Checklist](https://ux.princeton.edu/accessibility/accessibility-checklist)
 -   [MSU A11y Checklist](https://webaccess.msu.edu/Help_and_Resources/checklist.html)
--   [a11yproject Checklist](https://a11yproject.com/)
+-   [The A11Y Project](https://a11yproject.com/)
