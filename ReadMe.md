@@ -1,41 +1,144 @@
 <button>[回到首页](../index.md)</button>
 
+<!-- TOC -->
 
-- [1. 开发辅助工具](#1-开发辅助工具)
-    - [1.1 静态分析工具](#11-静态分析工具)
-    - [1.2 浏览器检测工具](#12-浏览器检测工具)
-    - [1.3 视觉测试工具](#13-视觉测试工具)
-- [2. 参考文献](#2-参考文献)
+-   [1. 开发 Checklist](#1-开发-Checklist)
 
-## 1. 开发辅助工具
+    -   [1.1 常规](#11-常规)
+    -   [1.2 语义化标签](#12-语义化标签)
+    -   [1.3 图片](#13-图片)
+    -   [1.4 表单](#14-表单)
+    -   [1.5 颜色和对比度](#15-颜色和对比度)
 
-开发测试由软件开发人员或工程师在软件开发生命周期的构建阶段执行。我们从代码静态分析、浏览器和视觉测试，降低软件的缺陷，从不同的角度进行测试：
+-   [2. 参考文献](#2-参考文献)
 
-### 1.1 静态分析工具
+## 1. 开发 Checklist 
 
-静态分析是指在不运行程序的条件下，对程序分析的方法，这里为开发者提供[eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y)，在不运行程序条件下，运行此工具对程序进行静态分析，介绍如下：
+对上节的知识了解后，我们为开发者提供一个改造的清单，我们所罗列的都是无障碍不可避免的问题，按照清单修改，页面基本支持无障碍，请开发者对如下规则进行阅读：
 
-* 对JSX代码进行无障碍标准测试。
-* eslint-plugin-jsx-a11y是对静态扫描，无需侵入代码，能扫到事件缺失，定义30多条比较常见规则，请[参考](https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules)。
-* 可以在开发和集成测试中使用。
+### 1.1 常规
 
-### 1.2 浏览器检测工具
+-   [ ] 设置 lang 让屏幕阅读器选择语言去读取，lang 参数值遵循[ISO_639-1 规则](https://en.wikipedia.org/wiki/ISO_639-1)，
 
-开发者在开发的过程中，可以通过浏览器插件对已经编写的代码进行测试，是否符合无障碍标准，这里为开发者提供[Axe Chrome Plugin](https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd)，介绍如下：
+    ```html
+    <html lang="en"></html>
+    或
+    <html xml:lang="en"></html>
+    ```
 
-* 在浏览器中测试代码是否符合无障碍标准。
-* Axe可访问性检查器是一个快速、轻量级的可访问性测试工具，它基于业内最流行的开源无障碍测试库axe-core，安装成功后可在Chrome Dev Tools面板找到。也可以使用`axe-core`静态分析当前已存在于document中的内容，请[参考](https://github.com/dequelabs/axe-core)。
-* 在控制台选择axe，就可以对网站进行测试，并列出不符合无障碍问题并给出解决方案。
+-   [ ] 所有标签属性要设置唯一 ID
 
-### 1.3 视觉测试工具
-在全球范围内，存在很多视觉障碍的用户，比如红绿色盲，在设计和开发的过程中需要考虑到他们的使用体验，这里为开发者提供[I want to see like the colour blind](https://chrome.google.com/webstore/detail/i-want-to-see-like-the-co/jebeedfnielkcjlcokhiobodkjjpbjia)，介绍如下：
+-   [ ] 页面上的文本，要按照书写习惯添加标点符号。屏幕阅读器在读取文本标点符号适时出现停顿
 
-* 在浏览器运行，对视觉进行测试。
-* 需要开发者根据不同类型的视觉用户进行测试。
-* Chrome插件，开启可模拟红、绿、蓝、全色盲、色弱等用户眼中的站点，直接发现站点中存在的可辨别性问题。
-##  2. 参考文献
+-   [ ] 当组件或元素聚焦时，要出现有聚焦的边框标志(比如按钮聚焦时，有蓝色边框)，使得与不聚焦状态做区别
 
-* [Development Testing](https://en.wikipedia.org/wiki/Development_testing)
-* [无障碍访问工具](https://www.w3cschool.cn/front_end_handbook_2017/front_end_handbook_2017-jtqp26ec.html)
-* [Static code Analysis plugin](https://github.com/evcohen/eslint-plugin-jsx-a11y)
-* [Visual plugin](https://websitecreationworkshop.com/blog/design-tips/see-like-color-blind/)
+-   [ ] 所有按钮文本描述都是可读取的，icon 类按钮要有`aria-label`或`aria-labelledby`来辅助描述
+
+-   [ ] 视频要添加字幕，通过引入文件，如下：
+
+    ```html
+    <video controls>
+        <source src="movie.mp4" type="video/mp4" />
+        <track
+            label="English Captions"
+            kind="captions"
+            srclang="eN"
+            src="captions.vtt"
+            default
+        />
+        <track
+            label="Subtitulos en español"
+            kind="captions"
+            srclang="es"
+            src="subs.vtt"
+        />
+    </video>
+    ```
+
+-   [ ] 对于一些文本属性，屏幕阅读器读取属性优先级如下(只读取优先级最高的)：aria-labelledby，aria-label，alt，title
+
+    对于同一个元素 aria-labelledby，aria-label 只能使用一个(在同时使用时，用户代理在生成可访问的名称属性时将为 aria-labelledby 分配更高的优先级)。
+
+-   [ ] 非语义标签的键盘事件捕获，要使用 onkeydown ，IE 浏览器不会为非字母数字键触发按键事件
+
+-   [ ] 代码的逻辑顺序与显示的顺序要保持一致
+
+-   [ ] 对于重复菜单的跳过，请[参考](../content-creation-link/page1.md)
+
+-   [ ] 关于元素的隐藏，请[参考](./content-creation-link/page2.md)
+
+### 1.2 语义化标签
+
+-   [ ] 务必使用语义化标签，并且body的直接子元素必须是以下几类标签，并且以下语义化标签与role为等价关系。对于更多语义化标签请[查阅](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+
+
+    | 语义化标签 | role | 
+    | :------| ------: | 
+    | header | banner | 
+    | nav | navigation |
+    | main | main |
+    | article | article |
+    | aside | complementary |
+    | footer | contentinfo |
+
+-   [ ] 每个页面，有且仅有一个`<main>`标签或 role="main"的元素，并且为页面的主题内容
+
+-   [ ] 列表结构尽量使用 ul、ol、dl 结构组织内容
+
+-   [ ] 不使用语义化标签时，合理使用了`aria-*`与`role`来描述元素，请[参考](../part1/WAI-ARIA.md)
+
+-   [ ] 要正确使用如下标签：
+
+```
+    b	粗体文本
+    em	着重文本
+    i	斜体字
+    strong 加重语气
+    ins	删除文本
+    del	下划线文本
+```
+
+-   [ ] 标题要使用 h1~h5，不能出现 h 标签跳跃，遵循从 h1 到 h5 顺序
+
+### 1.3 图片
+
+-   [ ] 图片要设置 alt 属性或者 longdesc 属性
+
+    -   对于有意义的图片，要设置 alt 并且描述文字简洁，不冗余，例如 logo：
+
+    ```html
+    <img src="logo.jpg" alt="this is logo" />
+    ```
+
+    -   对于无意义的图片，要设置 alt 为空，例如一些图标，装饰图片：
+
+    ```html
+    <img src="icon.jpg" alt="" />
+    ```
+
+-   [ ] 不要使用图片标题，使用文本标题
+
+### 1.4 表单
+
+-   [ ] 表单元素的 label 要遵循约定关系[WCAG 用户输入目的的列表](https://w3c.github.io/WCAG21-zh/index.html#input-purposes)
+        遵循这些规范有助于浏览器自动回填数据、屏幕阅读器更好地传达信息
+
+-   [ ] 表单元素要遵循如下规则：
+
+    使用 Tab 键可以顺序的切换表单元素
+
+    对于 label 描述表单控件，例如日期，提供具体的格式，方便用户输入，例子如下：
+    ```html
+    <label for="date">日期（日-月-年）</label>
+    <input type="text" name="date" id="date" />
+    ```
+
+### 1.5 颜色和对比度
+
+-   [ ] 不要依赖单一元素。例如：在展示图片、表格时，用户要加入纹理或图案。保证色盲用户能辨别，不用担心颜色会影响他对数据的理解。
+
+## 2. 参考文献
+
+-   [Princeton Content Creator Checklist](https://ux.princeton.edu/accessibility/accessibility-checklist)
+-   [MSU A11y Checklist](https://webaccess.msu.edu/Help_and_Resources/checklist.html)
+-   [The A11Y Project](https://a11yproject.com/)
